@@ -11,8 +11,7 @@ public class NouveauClient extends Client {
     }
 
     @Override
-    public Client login() {
-        Scanner sc = new Scanner(System.in);
+    public Client login(Scanner sc) {
         System.out.println("--- Inscription ---");
         System.out.print("Nom: ");
         this.nom = sc.nextLine();
@@ -29,8 +28,7 @@ public class NouveauClient extends Client {
 
     @Override
     public double getReduction() {
-        // offre de bienvenue : 10% 
-        System.out.println("Offre de bienvenue: 10% de réduction sur votre première réservation.");
+        System.out.println("Offre de bienvenue : 10% de réduction sur votre première réservation.");
         return 0.10;
     }
 }

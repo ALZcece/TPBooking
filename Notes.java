@@ -1,6 +1,6 @@
 package TPBooking;
 
-public class Notes {
+public class Notes implements IAffichable {
     public int note;
     public String commentaire;
     public Client auteur;
@@ -13,6 +13,7 @@ public class Notes {
         this.dates = dates;
     }
 
+    @Override
     public void afficher() {
         System.out.println("Note: " + note);
         System.out.println("Commentaire: " + commentaire);
