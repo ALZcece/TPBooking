@@ -17,7 +17,7 @@ public class Notes implements IAffichable {
     public void afficher() {
         System.out.println("Note: " + note);
         System.out.println("Commentaire: " + commentaire);
-        System.out.println("Auteur: " + auteur.nom + " " + auteur.prenom);
+        System.out.println("Auteur: " + auteur.getNom() + " " + auteur.getPrenom());
         System.out.println("Dates de séjour: du " + dates.debut + " au " + dates.fin);
     }
 }

@@ -14,15 +14,15 @@ public class NouveauClient extends Client {
     public Client login(Scanner sc) {
         System.out.println("--- Inscription ---");
         System.out.print("Nom: ");
-        this.nom = sc.nextLine();
+        this.setNom(sc.nextLine());
         System.out.print("Prénom: ");
-        this.prenom = sc.nextLine();
+        this.setPrenom(sc.nextLine());
         System.out.print("Email: ");
         this.email = sc.nextLine();
         System.out.print("Mot de passe: ");
         this.motDePasse = sc.nextLine();
         this.dateInscription = new java.util.Date();
-        System.out.println("Compte créé avec succès! Bienvenue " + prenom + "!");
+        System.out.println("Compte créé avec succès! Bienvenue " + getPrenom() + "!");
         return this;
     }
 

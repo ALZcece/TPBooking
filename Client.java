@@ -25,8 +25,8 @@ public abstract class Client extends Personne {
     public void afficher() {
         System.out.println("--- Client ---");
         System.out.println("ID: " + id);
-        System.out.println("Nom: " + nom);
-        System.out.println("Prénom: " + prenom);
+        System.out.println("Nom: " + getNom());
+        System.out.println("Prénom: " + getPrenom());
         System.out.println("Email: " + email);
         System.out.println("Date inscription: " + dateInscription);
         System.out.println("Réservations: " + nbReservations);
