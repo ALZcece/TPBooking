@@ -8,12 +8,12 @@ import java.util.Scanner;
 public class TP3Test {
 
     public List<Hebergement> initialisation() {
-        Hebergement h1 = new Hebergement("Hotel de Paris", "Paris", "Hotel", 5, 500, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true), new Equipement("Piscine", false)));
-        Hebergement h2 = new Hebergement("Le roi lion", "Lyon", "Hotel", 4, 80, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", false), new Equipement("Parking", true)));
-        Hebergement h3 = new Hebergement("Auberge de jeunesse", "Marseille", "Auberge de jeunesse", 1, 20, List.of(new Equipement("WiFi", false), new Equipement("Petit déjeuner", false), new Equipement("Cuisine commune", true), new Equipement("Douche", false)));
-        Hebergement h4 = new Hebergement("Hotel vue mer", "Nice", "Hotel", 2, 40, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true), new Equipement("Vue mer", false)));
-        Hebergement h5 = new Hebergement("Les vignerons", "Bordeaux", "Hotel", 1, 20, List.of(new Equipement("WiFi", false), new Equipement("Petit déjeuner", true), new Equipement("Oenologie", true)));
-        Hebergement h6 = new Hebergement("Maison d'hôtes", "Toulouse", "Maison d'hôtes", 4, 70, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true)));
+        Hebergement h1 = new Hotel("Hotel de Paris", "Paris", 5, 500, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true), new Equipement("Piscine", false)));
+        Hebergement h2 = new Hotel("Le roi lion", "Lyon", 4, 80, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", false), new Equipement("Parking", true)));
+        Hebergement h3 = new ChambreDHote("Auberge de jeunesse", "Marseille", 1, 20, List.of(new Equipement("WiFi", false), new Equipement("Petit déjeuner", false), new Equipement("Cuisine commune", true), new Equipement("Douche", false)));
+        Hebergement h4 = new Hotel("Hotel vue mer", "Nice", 2, 40, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true), new Equipement("Vue mer", false)));
+        Hebergement h5 = new Appartement("Loft vins", "Bordeaux", 2, 75, List.of(new Equipement("WiFi", false), new Equipement("Petit déjeuner", true), new Equipement("Oenologie", true)));
+        Hebergement h6 = new Appartement("Maison d'hôtes", "Toulouse", 4, 70, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true)));
         return List.of(h1, h2, h3, h4, h5, h6);
     }
 
