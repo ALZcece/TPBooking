@@ -43,8 +43,16 @@ public class Reservation {
         }
         return prixBase - reduction;
     }
-    // lh'bergement est reservé ?
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Reservation{id=" + id +
+            ", status=" + status +
+            ", client=" + (client != null ? client.getNom() + " " + client.getPrenom() : "null") +
+            ", hebergement=" + (hebergement != null ? hebergement.nom : "null") +
+            ", periode=[" + dates.debut + " -> " + dates.fin + "]" +
+            ", prixSansReduction=" + prixSansReduction +
+            ", prixFinal=" + prixFinal +
+            "}";
+    }
 }

@@ -20,4 +20,12 @@ public class Notes implements IAffichable {
         System.out.println("Auteur: " + auteur.getNom() + " " + auteur.getPrenom());
         System.out.println("Dates de séjour: du " + dates.debut + " au " + dates.fin);
     }
+
+    @Override
+    public String toString() {
+        return "Notes{note=" + note +
+            ", commentaire='" + commentaire + '\'' +
+            ", auteur=" + (auteur != null ? auteur.getNom() + " " + auteur.getPrenom() : "null") +
+            ", dates=[" + dates.debut + " - " + dates.fin + "]}";
+    }
 }

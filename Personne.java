@@ -18,7 +18,8 @@ public abstract class Personne {
 
     public abstract void afficher();
 
+    @Override
     public String toString() {
-        return "Nom: " + getNom() + "\nPrénom: " + getPrenom();
+        return "Personne{id=" + id + ", nom=" + getNom() + ", prenom=" + getPrenom() + "}";
     }
 }

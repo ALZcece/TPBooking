@@ -38,6 +38,18 @@ public class Hebergement implements IAffichable {
         System.out.println("---------------------------------\n");
     }
 
+    @Override
+    public String toString() {
+        return "Hebergement{id=" + id +
+            ", nom='" + nom + '\'' +
+            ", adresse='" + adresse + '\'' +
+            ", type='" + type + '\'' +
+            ", capacite=" + capacite +
+            ", prixParNuit=" + prixParNuit +
+            ", equipement=" + equipement.size() +
+            "}";
+    }
+
     public boolean estDisponible(PeriodesDispo periode) {
         for (Reservation r : reservations) {
             if (r == null || r.dates == null) continue;
