@@ -45,7 +45,7 @@ public class TP3Test {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NumberFormatException {
         TP3Test test = new TP3Test();
         List<Hebergement> listeHebergements = test.initialisation();
 
@@ -111,27 +111,42 @@ public class TP3Test {
         System.out.println("Entrer la date de départ (jj.mm.aaaa) :");
         String dateDepartStr = sc.nextLine();
 
-        String[] partsA = dateArriveeStr.split("\\.");
-        String[] partsD = dateDepartStr.split("\\.");
-        Calendar cA = Calendar.getInstance();
-        cA.set(Integer.parseInt(partsA[2]), Integer.parseInt(partsA[1]) - 1, Integer.parseInt(partsA[0]));
-        Calendar cD = Calendar.getInstance();
-        cD.set(Integer.parseInt(partsD[2]), Integer.parseInt(partsD[1]) - 1, Integer.parseInt(partsD[0]));
-        Date dA = cA.getTime();
-        Date dD = cD.getTime();
+        PeriodesDispo periode;
+        try {
+            String[] partsA = dateArriveeStr.split("\\.");
+            String[] partsD = dateDepartStr.split("\\.");
+            if (partsA.length != 3 || partsD.length != 3) {
+                throw new IllegalArgumentException("Format de date invalide : jj.mm.aaaa");
+            }
+            Calendar cA = Calendar.getInstance();
+            cA.set(Integer.parseInt(partsA[2]), Integer.parseInt(partsA[1]) - 1, Integer.parseInt(partsA[0]));
+            Calendar cD = Calendar.getInstance();
+            cD.set(Integer.parseInt(partsD[2]), Integer.parseInt(partsD[1]) - 1, Integer.parseInt(partsD[0]));
+            Date dA = cA.getTime();
+            Date dD = cD.getTime();
 
-        PeriodesDispo periode = new PeriodesDispo(dA, dD);
+            periode = new PeriodesDispo(dA, dD);
+            periode.valider();
+        } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException ex) {
+            System.out.println("Erreur de date : " + ex.getMessage());
+            System.out.println("Réservation annulée.");
+            return;
+        }
 
-        if (hebergementChoisi.estDisponible(periode)) {
-            System.out.println("Logement disponible.");
-            Reservation reservation = new Reservation(clientx, hebergementChoisi, periode);
-            System.out.println("Prix total : " + reservation.prixFinal + " euros.");
-            System.out.println("Confirmer ? (1=oui, 0=non)");
-            int c = sc.nextInt();
-            reservation.status = (c == 1 ? 1 : 2);
-            System.out.println(reservation.status == 1 ? "Réservation confirmée." : "Réservation annulée.");
-        } else {
-            System.out.println("Hébergement indisponible pour ces dates.");
+        try {
+            if (hebergementChoisi.estDisponible(periode)) {
+                System.out.println("Logement disponible.");
+                Reservation reservation = new Reservation(clientx, hebergementChoisi, periode);
+                System.out.println("Prix total : " + reservation.prixFinal + " euros.");
+                System.out.println("Confirmer ? (1=oui, 0=non)");
+                int c = sc.nextInt();
+                reservation.status = (c == 1 ? 1 : 2);
+                System.out.println(reservation.status == 1 ? "Réservation confirmée." : "Réservation annulée.");
+            } else {
+                System.out.println("Hébergement indisponible pour ces dates.");
+            }
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Erreur de réservation : " + ex.getMessage());
         }
 
         sc.close();

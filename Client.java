@@ -39,4 +39,15 @@ public abstract class Client extends Personne {
             nbReservations++;
         }
     }
+
+    public String getDomaineEmail() {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Email invalide : " + email);
+        }
+        String[] parts = email.split("@");
+        if (parts.length != 2 || parts[1].isBlank()) {
+            throw new IllegalArgumentException("Email invalide : " + email);
+        }
+        return parts[1];
+    }
 }

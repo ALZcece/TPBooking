@@ -14,6 +14,17 @@ public class Reservation {
 
     public Reservation(Client client, Hebergement hebergement, PeriodesDispo dates) {
         this.id = java.util.UUID.randomUUID().hashCode();
+        if (client == null) {
+            throw new IllegalArgumentException("Client manquant pour la réservation");
+        }
+        if (hebergement == null) {
+            throw new IllegalArgumentException("Hébergement manquant pour la réservation");
+        }
+        if (dates == null) {
+            throw new IllegalArgumentException("Période manquante pour la réservation");
+        }
+        dates.valider();
+
         this.client = client;
         this.hebergement = hebergement;
         this.dates = dates;
