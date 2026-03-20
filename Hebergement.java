@@ -2,7 +2,7 @@ package TPBooking;
 
 import java.util.List;
 
-public abstract class Hebergement implements IAffichable {
+public abstract class Hebergement implements IAffichable, Comparable<Hebergement> {
     public int id;
     public String nom;
     public String adresse;
@@ -42,6 +42,21 @@ public abstract class Hebergement implements IAffichable {
     public String toString() {
         return type + "{id=" + id + ", nom='" + nom + "', adresse='" + adresse + "', capacite=" + capacite + ", prixParNuit=" + prixParNuit + "}";
     }
+
+    @Override
+    public int compareTo(Hebergement other) {
+        if (other == null) return 1;
+        return this.nom.compareToIgnoreCase(other.nom);
+    }
+
+    public static class PrixComparator implements java.util.Comparator<Hebergement> {
+        @Override
+        public int compare(Hebergement h1, Hebergement h2) {
+            return Double.compare(h1.prixParNuit, h2.prixParNuit);
+        }
+    }
+
+    public static final java.util.Comparator<Hebergement> PRIX_COMPARATOR = new PrixComparator();
 
     public boolean estDisponible(PeriodesDispo periode) {
         for (Reservation r : reservations) {

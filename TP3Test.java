@@ -1,9 +1,12 @@
 package TPBooking;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TP3Test {
 
@@ -15,6 +18,31 @@ public class TP3Test {
         Hebergement h5 = new Appartement("Loft vins", "Bordeaux", 2, 75, List.of(new Equipement("WiFi", false), new Equipement("Petit déjeuner", true), new Equipement("Oenologie", true)));
         Hebergement h6 = new Appartement("Maison d'hôtes", "Toulouse", 4, 70, List.of(new Equipement("WiFi", true), new Equipement("Petit déjeuner", true)));
         return List.of(h1, h2, h3, h4, h5, h6);
+    }
+
+    public static List<Hebergement> trierParNom(List<Hebergement> hebergements) {
+        List<Hebergement> copie = new ArrayList<>(hebergements);
+        Collections.sort(copie);
+        return copie;
+    }
+
+    public static List<Hebergement> trierParPrix(List<Hebergement> hebergements) {
+        List<Hebergement> copie = new ArrayList<>(hebergements);
+        copie.sort(Hebergement.PRIX_COMPARATOR);
+        return copie;
+    }
+
+    public static List<Hebergement> filtrerParPrixMax(List<Hebergement> hebergements, double prixMax) {
+        return hebergements.stream().filter(h -> h.prixParNuit <= prixMax).collect(Collectors.toList());
+    }
+
+    public static void afficherListe(List<Hebergement> liste) {
+        int index = 1;
+        for (Hebergement h : liste) {
+            System.out.println("Option " + index + ":");
+            h.afficher();
+            index++;
+        }
     }
 
     public static void main(String[] args) {
@@ -35,13 +63,37 @@ public class TP3Test {
             clientx = new AncienClient().login(sc);
         }
 
-        System.out.println("\nVoici les hébergements disponibles :\n");
-        int i = 1;
-        for (Hebergement h : listeHebergements) {
-            System.out.println("Option " + i + ":");
-            h.afficher();
-            i++;
+        System.out.println("\nSouhaitez-vous trier/filtrer les hébergements ?");
+        System.out.println("1. Trier par nom (Comparable)");
+        System.out.println("2. Trier par prix (Comparator)");
+        System.out.println("3. Filtrer par prix maximum");
+        System.out.println("4. Aucun");
+        int optionTri = sc.nextInt();
+        sc.nextLine();
+
+        if (optionTri == 1) {
+            listeHebergements = trierParNom(listeHebergements);
+            System.out.println("\nHébergements triés par nom (Comparable) :");
+        } else if (optionTri == 2) {
+            listeHebergements = trierParPrix(listeHebergements);
+            System.out.println("\nHébergements triés par prix (Comparator) :");
+        } else if (optionTri == 3) {
+            System.out.println("Entrez le prix maximum :");
+            double prixMax = sc.nextDouble();
+            sc.nextLine();
+            listeHebergements = filtrerParPrixMax(listeHebergements, prixMax);
+            System.out.println("\nHébergements filtrés par prix <= " + prixMax + " :");
+        } else {
+            System.out.println("\nAucun tri/filtrage appliqué.");
         }
+
+        if (listeHebergements.isEmpty()) {
+            System.out.println("Aucun hébergement disponible après filtrage.");
+            sc.close();
+            return;
+        }
+
+        afficherListe(listeHebergements);
 
         System.out.println("\nEntrer le numéro de l'hébergement que vous voulez réserver :");
         int choix = sc.nextInt();
